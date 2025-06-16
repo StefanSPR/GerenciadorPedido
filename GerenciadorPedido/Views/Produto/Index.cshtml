@@ -1,0 +1,57 @@
+﻿@model IEnumerable<GerenciadorPedido.Application.ViewModel.ProdutoModel>
+
+@{
+    ViewData["Title"] = "Produtos";
+}
+
+<div class="card shadow-sm">
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <h5 class="mb-0">Clientes</h5>
+        <a asp-action="Create" class="btn btn-primary">
+            <i class="fas fa-plus me-1"></i> Novo Cliente
+        </a>
+    </div>
+
+    <div class="card-body p-0">
+        @if (!Model.Any())
+        {
+            <div class="alert alert-info m-3">
+                Nenhum cliente cadastrado.
+            </div>
+        }
+        else
+        {
+            <div class="table-responsive">
+                <table class="table table-hover table-striped align-middle mb-0">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Nome</th>
+                            <th>Preço</th>
+                            <th>Qunatidade em Estoque</th>
+                            <th class="text-center" style="width: 140px;">Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var produto in Model)
+                        {
+                            <tr>
+                                <td>@produto.Nome</td>
+                                <td>@produto.Preco</td>
+                                <td>@produto.QuantidadeEstoque</td>
+                                <td class="text-center">
+                                    <a asp-action="Edit" asp-route-id="@produto.Id" class="btn btn-sm btn-outline-primary me-1">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                    <a asp-action="Delete" asp-route-id="@produto.Id" class="btn btn-sm btn-outline-danger" title="Excluir"
+                                       onclick="return confirm('Deseja realmente excluir este cliente?');">
+                                        <i class="fas fa-trash"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+    </div>
+</div>
