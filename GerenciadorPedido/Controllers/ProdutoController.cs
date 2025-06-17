@@ -1,18 +1,23 @@
-﻿using GerenciadorPedido.Application.Interface;
+﻿using AutoMapper;
+using GerenciadorPedido.Application.Interface;
+using GerenciadorPedido.Application.Service;
 using GerenciadorPedido.Application.ViewModel;
+using GerenciadorPedido.Application.ViewModel.Create;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GerenciadorPedido.Web.Controllers
 {
     public class ProdutoController : Controller
     {
+        private readonly IMapper _mapper;
         private readonly IProdutoService _produtoService;
 
-        public ProdutoController(IProdutoService produtoService)
+        public ProdutoController(IProdutoService produtoService, IMapper mapper)
         {
             _produtoService = produtoService;
+            _mapper = mapper;
         }
-
+        #region Views
         public IActionResult Index()
         {
             var produtos = _produtoService.SelecionarTodos();
@@ -22,25 +27,28 @@ namespace GerenciadorPedido.Web.Controllers
         {
             return View("Cadastro");
         }
-
-        [HttpPost]
-        public IActionResult Create(ProdutoModel model)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View("Cadastro");
-            }
-
-            _produtoService.Inserir(model);
-            return RedirectToAction(nameof(Index));
-        }
-
         public IActionResult Edit(int id)
         {
             var model = _produtoService.ObterPorId(id);
             if (model == null) return NotFound();
             return View("Cadastro", model);
         }
+
+        #endregion
+        #region Requests
+
+        [HttpPost]
+        public IActionResult Create(DtoCrtProduto model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View("Cadastro");
+            }
+
+            _produtoService.Inserir(_mapper.Map<ProdutoModel>(model));
+            return RedirectToAction(nameof(Index));
+        }
+
 
         [HttpPost]
         public IActionResult Edit(ProdutoModel model)
@@ -51,8 +59,22 @@ namespace GerenciadorPedido.Web.Controllers
                 return View("Cadastro", model);
             }
 
-            _produtoService.Atualizar(model.Id, model);
+            _produtoService.Atualizar(model.Id, _mapper.Map<ProdutoModel>(model));
             return RedirectToAction(nameof(Index));
         }
+
+        [HttpGet]
+        public JsonResult GetPesquisar(string descricao)
+        {
+            IEnumerable<ProdutoModel> models = _produtoService.SelecionarPorNome(descricao);
+            return Json(models);
+        }
+        [HttpDelete]
+        public NoContentResult Delete(int id)
+        {
+            _produtoService.Apagar(id);
+            return NoContent();
+        }
+        #endregion
     }
 }

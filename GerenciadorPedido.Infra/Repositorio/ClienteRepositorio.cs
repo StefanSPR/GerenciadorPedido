@@ -13,6 +13,11 @@ namespace GerenciadorPedido.Infra.Repositorio
 
         protected override string TableName => "CLIENTE";
 
+        public IEnumerable<ClienteDominio> GetByNameEmail(string descricao)
+        {
+            return _contexo.Connection.Query<ClienteDominio>($"SELECT Id, Nome, Email, Telefone, DataCadastro FROM {TableName} WHERE Nome LIKE @Descricao OR Email LIKE @Descricao", new { Descricao = $"%{descricao}%" }).ToList();
+        }
+
         public override int Insert(ClienteDominio entity)
         {
             string cmd = @"INSERT INTO [Cliente] ([Nome], [Email], [Telefone])
@@ -26,7 +31,8 @@ namespace GerenciadorPedido.Infra.Repositorio
         {
             string cmd = @"UPDATE [Cliente] SET [Nome] = @Nome, [Email] = Email, [Telefone] = @Telefone
                 WHERE Id = @Id";
-            _contexo.Connection.Execute(cmd, new { entity.Id,entity.Nome, entity.Email, entity.Telefone });
+            _contexo.Connection.Execute(cmd, new { entity.Id, entity.Nome, entity.Email, entity.Telefone });
         }
+
     }
 }

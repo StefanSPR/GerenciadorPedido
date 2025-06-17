@@ -1,7 +1,6 @@
 ﻿using System.Data;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
-using Microsoft.IdentityModel.Protocols;
 
 
 namespace GerenciadorPedido.Infra

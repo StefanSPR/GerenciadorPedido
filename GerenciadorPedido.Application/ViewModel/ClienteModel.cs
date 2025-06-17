@@ -2,7 +2,7 @@
 
 namespace GerenciadorPedido.Application.ViewModel
 {
-    public class ClienteModel:BaseModelId
+    public class ClienteModel : BaseModelId
     {
         public ClienteModel(string nome, string email, string telefone)
         {
@@ -14,6 +14,7 @@ namespace GerenciadorPedido.Application.ViewModel
         public string Nome { get; set; }
         public string Email { get; set; }
         public string Telefone { get; set; }
-        public DateTime DataCadatro { get; set; } = DateTime.Now;
+        public DateTime DataCadastro { get; set; } 
+        public string DataCadastroDesc { get => DataCadastro.ToString("dd/MM/yyyy HH:mm:ss"); } 
     }
 }

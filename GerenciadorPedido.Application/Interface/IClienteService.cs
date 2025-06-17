@@ -5,5 +5,6 @@ namespace GerenciadorPedido.Application.Interface
 {
     public interface IClienteService : IServiceBase<ClienteModel>
     {
+        IEnumerable<ClienteModel> SelecionarPorNomeEmail(string descricao);
     }
 }

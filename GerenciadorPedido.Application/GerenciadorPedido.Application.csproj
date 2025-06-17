@@ -16,9 +16,4 @@
     <ProjectReference Include="..\GerenciadorPedido.Infra\GerenciadorPedido.Infra.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="ViewModel\Create\" />
-    <Folder Include="ViewModel\Update\" />
-  </ItemGroup>
-
 </Project>

@@ -19,19 +19,19 @@
 
             <div class="mb-3">
                 <label asp-for="Nome" class="form-label">Nome</label>
-                <input asp-for="Nome" class="form-control" />
+                <input asp-for="Nome" class="form-control" maxlength="255" required/>
                 <span asp-validation-for="Nome" class="text-danger small"></span>
             </div>
 
             <div class="mb-3">
                 <label asp-for="Email" class="form-label">E-mail</label>
-                <input asp-for="Email" class="form-control" />
+                <input asp-for="Email" class="form-control" maxlength="255" required />
                 <span asp-validation-for="Email" class="text-danger small"></span>
             </div>
 
             <div class="mb-3">
                 <label asp-for="Telefone" class="form-label">Telefone</label>
-                <input asp-for="Telefone" class="form-control" />
+                <input asp-for="Telefone" class="form-control" maxlength="20" required />
                 <span asp-validation-for="Telefone" class="text-danger small"></span>
             </div>
 

@@ -13,6 +13,11 @@ namespace GerenciadorPedido.Infra.Repositorio
 
         protected override string TableName => "PRODUTO";
 
+        public IEnumerable<ProdutoDominio> GetByName(string nome)
+        {
+            return _contexo.Connection.Query<ProdutoDominio>($"SELECT * FROM {TableName} WHERE Nome LIKE @Nome", new { Nome = $"%{nome}%" }).ToList();
+            
+        }
         public override int Insert(ProdutoDominio entity)
         {
             string cmd = @"INSERT INTO [Produto] ([Nome], [Descricao], [Preco], [QuantidadeEstoque])

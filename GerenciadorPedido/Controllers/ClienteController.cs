@@ -1,18 +1,24 @@
-﻿using GerenciadorPedido.Application.Interface;
+﻿using AutoMapper;
+using GerenciadorPedido.Application.Interface;
 using GerenciadorPedido.Application.ViewModel;
+using GerenciadorPedido.Application.ViewModel.Create;
+using GerenciadorPedido.Application.ViewModel.Update;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GerenciadorPedido.Web.Controllers
 {
     public class ClienteController : Controller
     {
+        #region CONSTRUTOR
         private readonly IClienteService _clienteService;
-
-        public ClienteController(IClienteService clienteService)
+        private readonly IMapper _mapper;
+        public ClienteController(IClienteService clienteService, IMapper mapper)
         {
             _clienteService = clienteService;
+            _mapper = mapper;
         }
-
+        #endregion
+        #region VIEWS
         public IActionResult Index()
         {
             var clientes = _clienteService.SelecionarTodos();
@@ -22,37 +28,49 @@ namespace GerenciadorPedido.Web.Controllers
         {
             return View("Cadastro");
         }
-
-        [HttpPost]
-        public IActionResult Create(ClienteModel model)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View("Cadastro");
-            }
-
-            _clienteService.Inserir(model);
-            return RedirectToAction(nameof(Index));
-        }
-
         public IActionResult Edit(int id)
         {
             var model = _clienteService.ObterPorId(id);
             if (model == null) return NotFound();
             return View("Cadastro", model);
         }
-
+        #endregion
+        #region Requests
+        [HttpGet]
+        public JsonResult GetPesquisar(string descricao)
+        {
+            IEnumerable<ClienteModel> models = _clienteService.SelecionarPorNomeEmail(descricao);
+            return Json(models);
+        }
         [HttpPost]
-        public IActionResult Edit(ClienteModel model)
+        public IActionResult Create(DtoCrtCliente model)
         {
             if (!ModelState.IsValid)
             {
-                model = _clienteService.ObterPorId(model.Id);
+                return View("Cadastro");
+            }
+
+            _clienteService.Inserir(_mapper.Map<ClienteModel>(model));
+            return RedirectToAction(nameof(Index));
+        }
+        [HttpPost]
+        public IActionResult Edit(DtoUpdCliente upd)
+        {
+            if (!ModelState.IsValid)
+            {
+                var model = _clienteService.ObterPorId(upd.Id);
                 return View("Cadastro", model);
             }
 
-            _clienteService.Atualizar(model.Id, model);
+            _clienteService.Atualizar(upd.Id, _mapper.Map<ClienteModel>(upd));
             return RedirectToAction(nameof(Index));
         }
+        [HttpDelete]
+        public NoContentResult Delete(int id)
+        {
+            _clienteService.Apagar(id);
+            return NoContent();
+        }
+        #endregion
     }
 }

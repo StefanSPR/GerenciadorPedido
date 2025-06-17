@@ -23,12 +23,16 @@ namespace GerenciadorPedido.Application.Configs
         private static IServiceCollection AddRepositorios(this IServiceCollection services)
         {
             return services
+                .AddScoped<IPedidoRepositorio, PedidoRepositorio>()
+                .AddScoped<IItemPedidoRepositorio, ItemPedidoRepositorio>()
                 .AddScoped<IClienteRepositorio, ClienteRepositorio>()
                 .AddScoped<IProdutoRepositorio, ProdutoRepositorio>();
         }
         private static IServiceCollection AddServices(this IServiceCollection services)
         {
             return services
+                        .AddScoped<IItemPedidoService, ItemPedidoService>()
+                        .AddScoped<IPedidoService, PedidoService>()
                         .AddScoped<IClienteService, ClienteService>()
                         .AddScoped<IProdutoService, ProdutoService>();
         }

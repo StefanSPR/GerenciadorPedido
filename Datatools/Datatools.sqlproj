@@ -62,6 +62,8 @@
   <ItemGroup>
     <Build Include="Tabelas\Produto.sql" />
     <Build Include="Tabelas\Cliente.sql" />
+    <Build Include="Tabelas\Pedido.sql" />
+    <Build Include="Tabelas\ItemPedido.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Seeder\ClienteSeeder.sql" />

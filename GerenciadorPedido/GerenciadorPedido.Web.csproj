@@ -7,7 +7,36 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="bootstrap" Version="5.3.6" />
+    <PackageReference Include="jQuery" Version="3.7.1" />
+    <PackageReference Include="jquery.datatables" Version="1.10.15" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\GerenciadorPedido.Application\GerenciadorPedido.Application.csproj" />
+    <ProjectReference Include="..\GerenciadorPedido.Shared\GerenciadorPedido.Shared.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Views\PartialView\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\js\Views\Cliente\Cliente_Cadastro.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\js\Views\Cliente\Cliente_Index.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\js\Views\Pedido\Pedido_Index.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\js\Views\Produto\Produto_Cadastro.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\js\Views\Produto\Produto_Index.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

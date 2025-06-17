@@ -3,7 +3,8 @@ using GerenciadorPedido.Infra.Interface.Base;
 
 namespace GerenciadorPedido.Infra.Interface
 {
-    public interface IProdutoRepositorio:IRepositoryBase<ProdutoDominio>
+    public interface IProdutoRepositorio : IRepositoryBase<ProdutoDominio>
     {
+        IEnumerable<ProdutoDominio> GetByName(string nome);
     }
 }

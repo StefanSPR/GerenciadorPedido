@@ -5,5 +5,6 @@ namespace GerenciadorPedido.Infra.Interface
 {
     public interface IClienteRepositorio : IRepositoryBase<ClienteDominio>
     {
+        IEnumerable<ClienteDominio> GetByNameEmail(string descricao);
     }
 }

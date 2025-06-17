@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\GerenciadorPedido.Shared\GerenciadorPedido.Shared.csproj" />
+  </ItemGroup>
+
 </Project>
