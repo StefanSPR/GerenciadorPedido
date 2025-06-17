@@ -18,10 +18,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Views\PartialView\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Include="wwwroot\js\Views\Cliente\Cliente_Cadastro.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

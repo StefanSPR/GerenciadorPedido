@@ -1,0 +1,19 @@
+﻿@{
+    var prefixo = ViewData["Prefixo"] == null ? "Cliente" : (string)ViewData["Prefixo"];
+    var label = ViewData["Label"] == null ? "Cliente" : (string)ViewData["Label"];
+    var id = ViewData["Id"] == null ? "" : ViewData["Id"].ToString();
+    var idLabel = prefixo + "AutoCompleteLabel";
+    var idSelect = ViewData["idSelect"] == null ? prefixo + "AutoComplete" : (string)ViewData["idSelect"];
+    var idErro = prefixo + "AutoCompleteErro";
+}
+@*<div class="form-group col-sm-12">*@
+<label id='@idLabel'>@label</label>
+<select class='select2 form-control' id='@idSelect'></select>
+<div class="text-danger" style="font-size: 80%; margin-top: .25rem;" id="@idErro"></div>
+<script type="text/javascript" src="~/js/Views/Partial/ClienteAutocomplete.js"></script>
+<script>
+    $(function () {
+        ClienteAutoCompleteInicializar("@idSelect",  "@idErro", "@id");
+    });
+</script>
+@*</div>*@
