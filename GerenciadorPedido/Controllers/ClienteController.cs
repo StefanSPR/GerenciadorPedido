@@ -1,8 +1,7 @@
 ﻿using AutoMapper;
 using GerenciadorPedido.Application.Interface;
 using GerenciadorPedido.Application.ViewModel;
-using GerenciadorPedido.Application.ViewModel.Create;
-using GerenciadorPedido.Application.ViewModel.Update;
+using GerenciadorPedido.Dto.Cliente;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GerenciadorPedido.Web.Controllers
@@ -42,8 +41,15 @@ namespace GerenciadorPedido.Web.Controllers
             IEnumerable<ClienteModel> models = _clienteService.SelecionarPorNomeEmail(descricao);
             return Json(models);
         }
+
+        [HttpGet]
+        public JsonResult GetId(int id)
+        {
+            ClienteModel models = _clienteService.ObterPorId(id);
+            return Json(models);
+        }
         [HttpPost]
-        public IActionResult Create(DtoCrtCliente model)
+        public IActionResult Create(CrtCliente model)
         {
             if (!ModelState.IsValid)
             {
@@ -54,7 +60,7 @@ namespace GerenciadorPedido.Web.Controllers
             return RedirectToAction(nameof(Index));
         }
         [HttpPost]
-        public IActionResult Edit(DtoUpdCliente upd)
+        public IActionResult Edit(UpdCliente upd)
         {
             if (!ModelState.IsValid)
             {

@@ -1,6 +1,6 @@
-﻿namespace GerenciadorPedido.Application.ViewModel.Create
+﻿namespace GerenciadorPedido.Dto.Cliente
 {
-    public class DtoCrtCliente
+    public class CrtCliente
     {
         public string? Nome { get; set; }
         public string? Email { get; set; }

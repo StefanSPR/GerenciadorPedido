@@ -1,8 +1,7 @@
 ﻿using AutoMapper;
 using GerenciadorPedido.Application.Interface;
-using GerenciadorPedido.Application.Service;
 using GerenciadorPedido.Application.ViewModel;
-using GerenciadorPedido.Application.ViewModel.Create;
+using GerenciadorPedido.Dto.Produto;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GerenciadorPedido.Web.Controllers
@@ -38,7 +37,7 @@ namespace GerenciadorPedido.Web.Controllers
         #region Requests
 
         [HttpPost]
-        public IActionResult Create(DtoCrtProduto model)
+        public IActionResult Create(CrtProduto model)
         {
             if (!ModelState.IsValid)
             {
@@ -67,6 +66,12 @@ namespace GerenciadorPedido.Web.Controllers
         public JsonResult GetPesquisar(string descricao)
         {
             IEnumerable<ProdutoModel> models = _produtoService.SelecionarPorNome(descricao);
+            return Json(models);
+        }
+        [HttpGet]
+        public JsonResult GetId(int id)
+        {
+            ProdutoModel models = _produtoService.ObterPorId(id);
             return Json(models);
         }
         [HttpDelete]

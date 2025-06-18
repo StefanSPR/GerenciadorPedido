@@ -1,6 +1,4 @@
-﻿using GerenciadorPedido.Dominio;
-
-namespace GerenciadorPedido.Infra.Interface.Base
+﻿namespace GerenciadorPedido.Infra.Interface.Base
 {
     public interface IRepositoryBase<T> 
     {

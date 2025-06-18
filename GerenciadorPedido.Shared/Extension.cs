@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Reflection;
 
-namespace GerenciadorPedido.Web
+namespace GerenciadorPedido.Shared
 {
     public static class Extension
     {

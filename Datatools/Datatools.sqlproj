@@ -68,5 +68,6 @@
   <ItemGroup>
     <None Include="Seeder\ClienteSeeder.sql" />
     <None Include="Seeder\ProdutoSeeder.sql" />
+    <None Include="CriarDB.sql" />
   </ItemGroup>
 </Project>

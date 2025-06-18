@@ -24,7 +24,7 @@ namespace GerenciadorPedido.Infra.Repositorio
                 VALUES
                 (@Nome, @Descricao, @Preco, @QuantidadeEstoque)
                 select @@Identity";
-            return _contexo.Connection.Query<int>(cmd, new { entity.Nome, entity.Descricao, entity.Preco, entity.QuantidadeEstoque }).First();
+            return _contexo.Connection.QuerySingle<int>(cmd, new { entity.Nome, entity.Descricao, entity.Preco, entity.QuantidadeEstoque });
         }
 
         public override void Update(ProdutoDominio entity)

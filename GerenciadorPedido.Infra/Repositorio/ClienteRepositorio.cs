@@ -23,8 +23,8 @@ namespace GerenciadorPedido.Infra.Repositorio
             string cmd = @"INSERT INTO [Cliente] ([Nome], [Email], [Telefone])
                 VALUES
                 (@Nome, @Email, @Telefone)
-                select @@Identity";
-            return _contexo.Connection.Query<int>(cmd, new { entity.Nome, entity.Email, entity.Telefone }).First();
+                SELECT @@Identity";
+            return _contexo.Connection.QuerySingle<int>(cmd, new { entity.Nome, entity.Email, entity.Telefone });
         }
 
         public override void Update(ClienteDominio entity)

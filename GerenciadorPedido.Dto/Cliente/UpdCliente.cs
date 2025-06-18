@@ -1,6 +1,6 @@
-﻿namespace GerenciadorPedido.Application.ViewModel.Update
+﻿namespace GerenciadorPedido.Dto.Cliente
 {
-    public class DtoUpdCliente
+    public class UpdCliente
     {
         public int Id { get; set; }
         public string? Nome { get; set; }

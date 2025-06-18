@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\js\Views\Pedido\Pedido_Cadastro.js" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="bootstrap" Version="5.3.6" />
     <PackageReference Include="jQuery" Version="3.7.1" />
     <PackageReference Include="jquery.datatables" Version="1.10.15" />
@@ -14,6 +18,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\GerenciadorPedido.Application\GerenciadorPedido.Application.csproj" />
+    <ProjectReference Include="..\GerenciadorPedido.Dto\GerenciadorPedido.Dto.csproj" />
     <ProjectReference Include="..\GerenciadorPedido.Shared\GerenciadorPedido.Shared.csproj" />
   </ItemGroup>
 
@@ -22,6 +27,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="wwwroot\js\Views\Cliente\Cliente_Index.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\js\Views\Pedido\Pedido_Cadastro.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="wwwroot\js\Views\Pedido\Pedido_Index.js">

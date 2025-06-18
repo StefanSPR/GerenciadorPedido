@@ -1,4 +1,11 @@
-﻿// Please see documentation at https://learn.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
-
-// Write your JavaScript code.
+﻿
+function ProdutoObterPorId(id, callback) {
+    if (id != null) {
+        $.ajax({
+            type: 'GET',
+            url: caminhoWebSite + 'Produto/GetId?Id=' + id,
+            async: false,
+            success: callback
+        });
+    } 
+}

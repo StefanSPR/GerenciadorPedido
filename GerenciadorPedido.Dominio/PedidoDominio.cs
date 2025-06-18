@@ -7,7 +7,7 @@ namespace GerenciadorPedido.Dominio
     {
         public int ClienteId { get; set; }
         public decimal ValorTotal { get; set; }
-        public StatusPedidoEnum Status { get; set; }
+        public StatusPedidoEnum PedidoStatus { get; set; }
         public DateTime DataCadastro { get; set; }
     }
 }

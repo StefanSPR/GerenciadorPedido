@@ -1,7 +1,9 @@
 ﻿using GerenciadorPedido.Application.ViewModel;
-using GerenciadorPedido.Application.ViewModel.Create;
-using GerenciadorPedido.Application.ViewModel.Update;
 using GerenciadorPedido.Dominio;
+using GerenciadorPedido.Dto.Cliente;
+using GerenciadorPedido.Dto.ItemPedido;
+using GerenciadorPedido.Dto.Pedido;
+using GerenciadorPedido.Dto.Produto;
 
 namespace GerenciadorPedido.Application.Profile
 {
@@ -20,23 +22,25 @@ namespace GerenciadorPedido.Application.Profile
         {
             CreateMap<ClienteDominio, ClienteModel>();
             CreateMap<ClienteModel, ClienteDominio>();
-            CreateMap<DtoUpdCliente, ClienteModel>();
-            CreateMap<DtoCrtCliente, ClienteModel>();
+            CreateMap<UpdCliente, ClienteModel>();
+            CreateMap<CrtCliente, ClienteModel>();
         }
         private void MapProduto()
         {
-            CreateMap<DtoCrtProduto, ProdutoModel>();
-            CreateMap<DtoUpdProduto, ProdutoModel>();
+            CreateMap<CrtProduto, ProdutoModel>();
+            CreateMap<UpdProduto, ProdutoModel>();
             CreateMap<ProdutoDominio, ProdutoModel>();
             CreateMap<ProdutoModel, ProdutoDominio>();
         }
         private void MapPedido()
         {
+            CreateMap<CrtPedido, PedidoModel>();
             CreateMap<PedidoDominio, PedidoModel>();
             CreateMap<PedidoModel, PedidoDominio>();
         }
         private void MapItemPedido()
         {
+            CreateMap<CrtItemPedido, ItemPedidoModel>();
             CreateMap<ItemPedidoDominio, ItemPedidoModel>();
             CreateMap<ItemPedidoModel, ItemPedidoDominio>();
 

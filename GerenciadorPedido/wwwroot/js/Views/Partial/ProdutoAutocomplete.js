@@ -1,19 +1,19 @@
 ﻿// inicialização
-function ClienteAutoCompleteInicializar(idSelect,  idErro, id) {
+function ProdutoAutoCompleteInicializar(idSelect, idErro, id) {
     $('#' + idSelect).change(function () { $('#' + idErro).addClass("d-none"); });
-    
-        ClienteAutoComplete($('#' + idSelect), null);
 
-    if (id != undefined && id != "") {
-        ClienteAutoCompleteSetValue($('#' + idSelect), id);
+    ProdutoAutoComplete($('#' + idSelect), null);
+
+    if (id != undefined && id != "0") {
+        ProdutoAutoCompleteSetValue($('#' + idSelect), id);
     }
 }
 
-// configuração padrão para os campos select2 - autocomplete de Cliente
-function ClienteAutoComplete(select) {
+// configuração padrão para os campos select2 - autocomplete de Produto
+function ProdutoAutoComplete(select) {
     //Configuração necessária para fazer o AutoComplete
-    var url = caminhoWebSite + 'Cliente/GetPesquisar';
-    var mensagemErro = "Erro ao obter os clientes";
+    var url = caminhoWebSite + 'Produto/GetPesquisar';
+    var mensagemErro = "Erro ao obter os Produtos";
     var mapeamento = function (item) {
         return {
             text: item.nome,
@@ -26,7 +26,7 @@ function ClienteAutoComplete(select) {
         language: "pt-BR",
         minimumInputLength: 3,
         allowClear: true,
-        placeholder: "Pesquisar por Nome ou Email do Cliente",
+        placeholder: "Pesquisar por Nome do Produto",
         ajax: {
             url: url,
             dataType: 'json',
@@ -54,15 +54,15 @@ function ClienteAutoComplete(select) {
 }
 
 // inicializa um valor
-function ClienteAutoCompleteSetValue(select, id) {
+function ProdutoAutoCompleteSetValue(select, id) {
     if (id != null) {
         $.ajax({
             type: 'GET',
-            url: caminhoWebSite + 'Cliente/GetId?Id=' + id,
+            url: caminhoWebSite + 'Produto/GetId?Id=' + id,
             async: false,
             success: function (data) {
                 // create the option and append to Select2
-                var option = new Option((data.nome), (data.id), true, true);
+                var option = new Option(data, data.id, true, true);
                 select.append(option).trigger('change');
                 // manually trigger the `select2:select` event
                 select.trigger({

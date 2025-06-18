@@ -1,8 +1,7 @@
-﻿namespace GerenciadorPedido.Application.ViewModel.Update
+﻿namespace GerenciadorPedido.Dto.Produto
 {
-    public class DtoUpdProduto
+    public class CrtProduto
     {
-        public int Id { get; set; }
         public string Nome { get; set; }
         public string Descricao { get; set; }
         public decimal Preco { get; set; }

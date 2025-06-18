@@ -1,62 +1,53 @@
-﻿@using GerenciadorPedido.Shared;
-@using GerenciadorPedido.Web
-@model IEnumerable<GerenciadorPedido.Application.ViewModel.PedidoModel>
-
-@{
+﻿@{
     ViewData["Title"] = "Pedidos";
 }
 
+
 <div class="card shadow-sm">
-    <div class="card-header d-flex justify-content-between align-items-center">
-        <h5 class="mb-0">Clientes</h5>
-        <div class="float-end">
-            <a asp-action="Create" class="btn btn-primary">
-                <i class="fas fa-plus me-1"></i> Novo Pedido
-            </a>
+    <div class="card-header">
+        <div class="row align-items-center">
+            <div class="col-12 mb-2">
+                <h5 class="mb-0">Clientes</h5>
+            </div>
+            <div class="col-4 mb-2 ">
+                @Html.Partial("~/Views/PartialView/ClienteAutocomplete.cshtml")
+            </div>
+            <div class="col-4 mb-2 ">
+                <label for="dropStatus">Status</label>
+                <select id="dropStatus" class="form-control">
+                    <option value="null">Todos</option>
+                    <option value="0">Novo</option>
+                    <option value="1">Processando</option>
+                    <option value="2">Finalizado</option>
+                </select>
+            </div>
+            <div class="col-4 text-end">
+                <a asp-action="Create" class="btn btn-primary me-2 mb-1">
+                    <i class="fas fa-plus me-1"></i> Novo Pedido
+                </a>
+                <button id="btnPesquisar" class="btn btn-secondary mb-1">
+                    <i class="fas fa-search me-1"></i> Pesquisar
+                </button>
+            </div>
+        </div>
     </div>
 
     <div class="card-body p-0">
-        @if (!Model.Any())
-        {
-            <div class="alert alert-info m-3">
-                Nenhum Pedido cadastrado.
-            </div>
-        }
-        else
-        {
-            <div class="table-responsive">
-                <table class="table table-hover table-striped align-middle mb-0">
-                    <thead class="table-light">
-                        <tr>
-                            <th>Cliente</th>
-                            <th>Data</th>
-                            <th>Valor Total</th>
-                            <th>Status</th>
-                            <th class="text-center" style="width: 140px;">Ações</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var pedido in Model)
-                        {
-                            <tr>
-                                <td>@pedido.ClienteId</td>
-                                <td>@pedido.DataCadastro.ToString("dd/MM/yyyy HH:mm:ss")</td>
-                                <td>@pedido.ValorTotal</td>
-                                <td>@pedido.Status.GetEnumDisplayName()</td>
-                                <td class="text-center">
-                                    <a asp-action="Edit" asp-route-id="@pedido.Id" class="btn btn-sm btn-outline-primary me-1">
-                                        <i class="fas fa-edit"></i>
-                                    </a>
-                                    <a asp-action="Delete" asp-route-id="@pedido.Id" class="btn btn-sm btn-outline-danger" title="Excluir"
-                                       onclick="return confirm('Deseja realmente excluir este Pedido?');">
-                                        <i class="fas fa-trash"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
-            </div>
-        }
+        <div class="table-responsive p-3">
+            <table id="tablePesquisa" class="table table-hover table-striped align-middle mb-0">
+                <thead class="table-light">
+                    <tr>
+                        <th>Cliente</th>
+                        <th>Data</th>
+                        <th>Valor Total</th>
+                        <th>Status</th>
+                        <th class="text-center" style="width: 140px;">Ações</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
     </div>
 </div>
+@section Scripts {
+    <script type="text/javascript" src="~/js/Views/Pedido/Pedido_Index.js"></script>
+}

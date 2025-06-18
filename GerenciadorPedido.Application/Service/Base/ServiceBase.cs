@@ -17,12 +17,12 @@ namespace GerenciadorPedido.Application.Service.Base
             _mapper = mapper;
         }
         #region Public
-        public void Apagar(int id)
+        public virtual void Apagar(int id)
         {
             _repositorio.Delete(id);
         }
 
-        public void Atualizar(int id, T upd)
+        public virtual void Atualizar(int id, T upd)
         {
             Validar(upd);
             ValidarAtualizar(upd);
@@ -31,7 +31,7 @@ namespace GerenciadorPedido.Application.Service.Base
             _repositorio.Update(dominio);
         }
 
-        public int Inserir(T create)
+        public virtual int Inserir(T create)
         {
             TDominio dominio = _mapper.Map<TDominio>(create);
             Validar(create);
