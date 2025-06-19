@@ -21,7 +21,7 @@ namespace GerenciadorPedido.Infra.Repositorio.Base
 
         public virtual T? GetById(int id)
         {
-            return _contexo.Connection.Query<T>($"SELECT * FROM {TableName} WHERE Id = @Id", new { Id = id }).FirstOrDefault();            
+            return _contexo.Connection.QuerySingle<T>($"SELECT * FROM {TableName} WHERE Id = @Id", new { Id = id });            
         }
 
         public virtual IEnumerable<T> GetAll()

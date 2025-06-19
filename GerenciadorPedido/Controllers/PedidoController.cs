@@ -32,9 +32,9 @@ namespace GerenciadorPedido.Web.Controllers
         {
             var model = _pedidoService.ObterPorId(id);
             if (model == null) return NotFound();
-            return View("Cadastro", model);
+            ViewBag.Id = id;
+            return View("Cadastro");
         }
-
         #endregion
         #region Requests
         [HttpGet]
@@ -43,11 +43,17 @@ namespace GerenciadorPedido.Web.Controllers
             IEnumerable<PedidoModel> pedidos = _pedidoService.SelecionarPorStatusECliente(status, clienteId);
             return Json(pedidos);
         }
+        [HttpGet]
+        public JsonResult GetId(int id)
+        {
+            var pedido = _pedidoService.ObterPorId(id);
+            return Json(pedido);
+        }
         [HttpPost]
         public IActionResult Inserir(CrtPedido pedido)
         {
-            _pedidoService.Inserir(_mapper.Map<PedidoModel>(pedido));
-            return RedirectToAction(nameof(Index));
+            var id = _pedidoService.Inserir(_mapper.Map<PedidoModel>(pedido));
+            return Json(id);
         }
         [HttpPost]
         public IActionResult Editar(PedidoModel pedido)

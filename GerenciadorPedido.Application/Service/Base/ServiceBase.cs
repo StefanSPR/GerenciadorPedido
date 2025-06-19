@@ -39,7 +39,7 @@ namespace GerenciadorPedido.Application.Service.Base
             return _repositorio.Insert(dominio);
         }
 
-        public T ObterPorId(int id)
+        public virtual T ObterPorId(int id)
         {
             var domminio = _repositorio.GetById(id);
             return _mapper.Map<T>(domminio);

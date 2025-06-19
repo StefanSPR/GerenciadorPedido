@@ -10,15 +10,20 @@ namespace GerenciadorPedido.Application.Service
 {
     public class PedidoService : ServiceBase<PedidoModel, PedidoDominio>, IPedidoService
     {
+        #region Construtor
         private readonly IPedidoRepositorio _pedidoRepositorio;
         private readonly IItemPedidoRepositorio _itemPedidoRepositorio;
         private readonly IClienteRepositorio _clienteRepositorio;
-        public PedidoService(IPedidoRepositorio repositorio, IMapper mapper, IClienteRepositorio clienteRepositorio, IItemPedidoRepositorio itemPedidoRepositorio) : base(repositorio, mapper)
+        private readonly IProdutoRepositorio _produtoRepositorio;
+        public PedidoService(IPedidoRepositorio repositorio, IMapper mapper, IClienteRepositorio clienteRepositorio, IItemPedidoRepositorio itemPedidoRepositorio, IProdutoRepositorio produtpRepositorio) : base(repositorio, mapper)
         {
             _pedidoRepositorio = repositorio;
             _clienteRepositorio = clienteRepositorio;
             _itemPedidoRepositorio = itemPedidoRepositorio;
+            _produtoRepositorio = produtpRepositorio;
         }
+        #endregion
+        #region Public
         public override int Inserir(PedidoModel create)
         {
             Validar(create);
@@ -48,6 +53,17 @@ namespace GerenciadorPedido.Application.Service
             });
             return ret;
         }
+        public override PedidoModel ObterPorId(int id)
+        {
+            var model = base.ObterPorId(id);
+            model.ItensPedido = _mapper.Map<List<ItemPedidoModel>>( _itemPedidoRepositorio.GetByPedidoId(model.Id));
+            foreach (var item in model.ItensPedido)
+            {
+                item.Produto = _mapper.Map<ProdutoModel>(_produtoRepositorio.GetById(item.ProdutoId));
+            }
+            return model;
+        }
+        #endregion
 
         protected override void Validar(PedidoModel model)
         {

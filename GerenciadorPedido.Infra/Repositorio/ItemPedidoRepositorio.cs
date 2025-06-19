@@ -13,6 +13,11 @@ namespace GerenciadorPedido.Infra.Repositorio
 
         protected override string TableName => "ItemPedido";
 
+        public IEnumerable<ItemPedidoDominio> GetByPedidoId(int id)
+        {
+            return _contexo.Connection.Query<ItemPedidoDominio>($"SELECT * FROM {TableName} WHERE [PedidoId] = @Id", new { Id = id });
+        }
+
         public override int Insert(ItemPedidoDominio entity)
         {
 

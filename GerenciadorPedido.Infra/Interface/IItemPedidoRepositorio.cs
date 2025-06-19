@@ -5,5 +5,6 @@ namespace GerenciadorPedido.Infra.Interface
 {
     public interface IItemPedidoRepositorio : IRepositoryBase<ItemPedidoDominio>
     {
+        IEnumerable<ItemPedidoDominio> GetByPedidoId(int id);
     }
 }

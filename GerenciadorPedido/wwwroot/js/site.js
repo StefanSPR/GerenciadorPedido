@@ -9,3 +9,13 @@ function ProdutoObterPorId(id, callback) {
         });
     } 
 }
+function PedidoObterPorId(id, callback) {
+    if (id != null) {
+        $.ajax({
+            type: 'GET',
+            url: caminhoWebSite + 'Pedido/GetId?Id=' + id,
+            async: false,
+            success: callback
+        });
+    }
+}
