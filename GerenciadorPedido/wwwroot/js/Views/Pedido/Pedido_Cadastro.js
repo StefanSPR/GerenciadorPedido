@@ -47,6 +47,10 @@ let escopo = {
 // ----------------------------------------------------
 function IncluirProduto(data) {
     const quantidade = parseInt(escopo.campos.quantidade.val());
+    if (quantidade > data.quantidadeEstoque) {
+        toastr.warning("Quantidade excede a quantidade em estoque.");
+        return;
+    }
     listaItems.push({
         produtoId: data.id,
         nome: data.nome,
