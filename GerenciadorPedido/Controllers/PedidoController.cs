@@ -28,10 +28,8 @@ namespace GerenciadorPedido.Web.Controllers
         {
             return View("Cadastro");
         }
-        public IActionResult Edit(int id)
+        public IActionResult Visualizar(int id)
         {
-            var model = _pedidoService.ObterPorId(id);
-            if (model == null) return NotFound();
             ViewBag.Id = id;
             return View("Cadastro");
         }

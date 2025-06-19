@@ -1,12 +1,12 @@
 ﻿// inicialização
-function ClienteAutoCompleteInicializar(idSelect,  idErro, id) {
+function ClienteAutoCompleteInicializar(idSelect, idErro, id) {
     $('#' + idSelect).change(function () { $('#' + idErro).addClass("d-none"); });
-    
-        ClienteAutoComplete($('#' + idSelect), null);
 
-    if (id != undefined && id != "") {
-        ClienteAutoCompleteSetValue($('#' + idSelect), id);
-    }
+    ClienteAutoComplete($('#' + idSelect), null);
+
+    //if (id != undefined && id != "") {
+    //    ClienteAutoCompleteSetValue($('#' + idSelect), id);
+    //}
 }
 
 // configuração padrão para os campos select2 - autocomplete de Cliente

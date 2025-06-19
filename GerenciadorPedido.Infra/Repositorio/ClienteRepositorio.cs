@@ -17,7 +17,10 @@ namespace GerenciadorPedido.Infra.Repositorio
         {
             return _contexo.Connection.Query<ClienteDominio>($"SELECT Id, Nome, Email, Telefone, DataCadastro FROM {TableName} WHERE Nome LIKE @Descricao OR Email LIKE @Descricao", new { Descricao = $"%{descricao}%" }).ToList();
         }
-
+        public override ClienteDominio? GetById(int id)
+        {
+            return _contexo.Connection.QuerySingle<ClienteDominio>($"SELECT Id, Nome, Email, Telefone, DataCadastro FROM {TableName} WHERE Id = @Id", new { Id = id });
+        }
         public override int Insert(ClienteDominio entity)
         {
             string cmd = @"INSERT INTO [Cliente] ([Nome], [Email], [Telefone])

@@ -1,6 +1,6 @@
 ﻿@Html.Hidden("idPedido", ((int?)ViewBag.Id ?? 0).ToString())
 
-<div class="card shadow-sm">
+<div class="card shadow-sm mb-3">
     <div class="card-header">
         <h5 class="mb-0">@ViewData["Title"]</h5>
     </div>
@@ -11,7 +11,7 @@
         </div>
     </div>
     <div class="card-body mb-3">
-        <div class="row mb-3">
+        <div class="row mb-3" id="pnlAdicionar">
             <div class="col-4">
                 @Html.Partial("~/Views/PartialView/ProdutoAutocomplete.cshtml")
             </div>
@@ -39,9 +39,11 @@
             </table>
         </div>
     </div>
+</div>
+<div class="card shadow-sm">
     <div class="card-body mb-3">
         <div class="d-flex justify-content-between">
-            <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+            <a id="btnVoltar" asp-action="Index" class="btn btn-secondary">Cancelar</a>
             <button type="button" id="btnSalvar" class="btn btn-success">
                 <i class="fas fa-save me-1"></i> Salvar
             </button>

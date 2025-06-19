@@ -1,4 +1,5 @@
 ﻿var listaItems = [];
+var isVisualizar = false;
 let escopo = {
     campos: {
         cliente: $('#ClienteAutoComplete'),
@@ -8,17 +9,25 @@ let escopo = {
     },
     botoes: {
         adicionar: $('#btnAdicionar'),
-        salvar: $('#btnSalvar')
+        salvar: $('#btnSalvar'),
+        voltar:$('#btnVoltar')
     },
     tabela: {
         itens: $('#tableItem'),
     },
+    painel: {
+        adicionar: $('#pnlAdicionar')
+    }
 };
 (function () {
     $(document).ready(function () {
         if (escopo.campos.idPedido.val() != "0") {
+            isVisualizar = true;
             escopo.campos.cliente.attr('disabled', true);
-            PedidoObterPorId(escopo.campos.idPedido.val(), InicializarCampos)
+            escopo.botoes.salvar.addClass('d-none');
+            escopo.painel.adicionar.addClass('d-none');
+            escopo.botoes.voltar.text('Voltar')
+            PedidoObterPorId(escopo.campos.idPedido.val(), InicializarCampos);
         }
         escopo.botoes.adicionar.on('click', function () {
             if (!ValidarAdicionar()) return;
@@ -75,6 +84,7 @@ function InicializarDataTable(data) {
                     data: 'precoUnitario',
                 },
                 {
+                    visible: !isVisualizar,
                     data: null,
                     orderable: false,
                     className: 'text-center',
@@ -159,8 +169,8 @@ function Salvar() {
 // ----------------------------------------------------
 function InicializarCampos(data) {
     ClienteAutoCompleteSetValue(escopo.campos.cliente, data.clienteId);
-    for (var i = 0; i < data.ItensPedido.length; i++) {
-        let item = data.ItensPedido[i]
+    for (var i = 0; i < data.itensPedido.length; i++) {
+        let item = data.itensPedido[i]
         listaItems.push({
             produtoId: item.produto.id,
             nome: item.produto.nome,
@@ -168,5 +178,5 @@ function InicializarCampos(data) {
             precoUnitario: parseFloat(item.precoUnitario).toFixed(2).replace('.', ',') ,
         });
     }
-
+    InicializarDataTable(listaItems);
 }
