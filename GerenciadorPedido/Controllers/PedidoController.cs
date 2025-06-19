@@ -53,10 +53,11 @@ namespace GerenciadorPedido.Web.Controllers
             var id = _pedidoService.Inserir(_mapper.Map<PedidoModel>(pedido));
             return Json(id);
         }
-        [HttpPost]
-        public IActionResult Editar(PedidoModel pedido)
+        [HttpPut]
+        public NoContentResult Avancar([FromRoute]int id)
         {
-            return RedirectToAction(nameof(Index));
+            _pedidoService.Avancar(id);
+            return NoContent();
         }
         #endregion
     }

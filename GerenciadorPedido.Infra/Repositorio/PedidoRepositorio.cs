@@ -27,15 +27,15 @@ namespace GerenciadorPedido.Infra.Repositorio
 
         public IEnumerable<PedidoDominio> GetByStatusECliente(StatusPedidoEnum? status, int? clienteId)
         {
-            return _contexo.Connection.Query<PedidoDominio>($@"SELECT [Id],[ClienteId],[ValorTotal],[PedidoSatus],[DataCadastro]
+            return _contexo.Connection.Query<PedidoDominio>($@"SELECT [Id],[ClienteId],[ValorTotal],[PedidoStatus],[DataCadastro]
                     FROM {TableName} 
-                    WHERE ([PedidoSatus] = @PedidoStatus OR @PedidoStatus IS NULL) 
+                    WHERE ([PedidoStatus] = @PedidoStatus OR @PedidoStatus IS NULL) 
                     AND  (ClienteId = @ClienteId OR @ClienteId IS NULL) ", new { PedidoStatus = status, ClienteId = clienteId }).ToList();
         }
 
         public override void Update(PedidoDominio entity)
         {
-            _contexo.Connection.Execute($@"UPDATE {TableName} SET ValorTotal = @ValorTotal, Satus = @Status, ClienteId = @ClienteId WHERE Id = @Id", 
+            _contexo.Connection.Execute($@"UPDATE {TableName} SET ValorTotal = @ValorTotal, PedidoStatus = @PedidoStatus, ClienteId = @ClienteId WHERE Id = @Id", 
                 new { entity.ValorTotal, entity.PedidoStatus, entity.Id, entity.ClienteId });
         }
     }

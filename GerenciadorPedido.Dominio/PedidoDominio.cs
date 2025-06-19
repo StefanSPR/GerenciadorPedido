@@ -9,5 +9,18 @@ namespace GerenciadorPedido.Dominio
         public decimal ValorTotal { get; set; }
         public StatusPedidoEnum PedidoStatus { get; set; }
         public DateTime DataCadastro { get; set; }
+
+        public void AvancarStatus()
+        {
+            switch (PedidoStatus)
+            {
+                case StatusPedidoEnum.Novo:
+                    PedidoStatus = StatusPedidoEnum.Processando;
+                    break;
+                case StatusPedidoEnum.Processando:
+                    PedidoStatus = StatusPedidoEnum.Finalizado;
+                    break;
+            }
+        }
     }
 }

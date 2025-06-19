@@ -48,6 +48,26 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="modalProcessar" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header justify-content-center">
+                <h4 class="text-center">Aviso</h4>
+            </div>
+            <div class="modal-body" style="text-align:center">
+                <input type="hidden" id="inpPedidoId" />
+                <p id="txtModal">
+                    Deseja realmente processar o pedido?
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="btnFechar" class="btn btn-sm btn-secondary" data-dismiss="modal" onclick="FecharModal()"><i class="fas fa-times"></i> Não</button>
+                <button type="button" id="btnConfirmar" class="btn btn-sm btn-success"><i class="fas fa-check-circle"></i> Sim</button>
+            </div>
+        </div>
+    </div>
+</div>
 @section Scripts {
     <script type="text/javascript" src="~/js/Views/Pedido/Pedido_Index.js"></script>
 }

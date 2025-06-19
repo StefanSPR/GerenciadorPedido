@@ -63,6 +63,14 @@ namespace GerenciadorPedido.Application.Service
             }
             return model;
         }
+
+        public void Avancar(int id)
+        {
+            var pedido = _repositorio.GetById(id);
+            if (pedido == null) throw new ArgumentException("Pedido Nulo");
+            pedido.AvancarStatus(); 
+            _pedidoRepositorio.Update(pedido);
+        }
         #endregion
 
         protected override void Validar(PedidoModel model)
@@ -79,5 +87,6 @@ namespace GerenciadorPedido.Application.Service
         {
             //throw new NotImplementedException();
         }
+
     }
 }
