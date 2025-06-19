@@ -37,29 +37,18 @@ namespace GerenciadorPedido.Web.Controllers
         #region Requests
 
         [HttpPost]
-        public IActionResult Create(CrtProduto model)
+        public JsonResult Create(CrtProduto model)
         {
-            if (!ModelState.IsValid)
-            {
-                return View("Cadastro");
-            }
-
-            _produtoService.Inserir(_mapper.Map<ProdutoModel>(model));
-            return RedirectToAction(nameof(Index));
+            var i =_produtoService.Inserir(_mapper.Map<ProdutoModel>(model));
+            return Json(i);
         }
 
 
-        [HttpPost]
-        public IActionResult Edit(ProdutoModel model)
+        [HttpPut]
+        public NoContentResult Edit(UpdProduto model)
         {
-            if (!ModelState.IsValid)
-            {
-                model = _produtoService.ObterPorId(model.Id);
-                return View("Cadastro", model);
-            }
-
             _produtoService.Atualizar(model.Id, _mapper.Map<ProdutoModel>(model));
-            return RedirectToAction(nameof(Index));
+            return NoContent();
         }
 
         [HttpGet]

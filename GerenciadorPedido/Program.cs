@@ -1,5 +1,6 @@
 using GerenciadorPedido.Application.Configs;
 using GerenciadorPedido.Infra;
+using System.Globalization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +10,9 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddScoped(opt => new Contexto(builder.Configuration));
 //builder.Services.AddSingleton<GerenciadorPedido.Infra.Contexto>(builder.Configuration.GetConnectionString("DefaultConnection"));
 builder.Services.AddConfigurationsExtension();
+var defaultCulture = new CultureInfo("pt-BR");
+CultureInfo.DefaultThreadCurrentCulture = defaultCulture;
+CultureInfo.DefaultThreadCurrentUICulture = defaultCulture;
 
 
 var app = builder.Build();

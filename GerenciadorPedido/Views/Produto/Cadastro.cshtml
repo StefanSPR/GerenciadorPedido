@@ -11,39 +11,37 @@
     </div>
 
     <div class="card-body">
-        <form asp-action="@(isEdicao ? "Edit" : "Create")" method="post">
-            @if (isEdicao)
-            {
-                <input type="hidden" asp-for="Id" />
-            }
+        <form id="formProduto">
+            <input type="hidden" id="inpId" value="@Model?.Id" />
 
             <div class="mb-3">
-                <label asp-for="Nome" class="form-label">Nome</label>
-                <input asp-for="Nome" class="form-control" />
-                <span asp-validation-for="Nome" class="text-danger small"></span>
+                <label for="inpNome" class="form-label">Nome</label>
+                <input type="text" id="inpNome" class="form-control" value="@Model?.Nome" />
+                <div class="invalid-feedback">Campo obrigatório.</div>
             </div>
 
             <div class="mb-3">
-                <label asp-for="Descricao" class="form-label">Descrição</label>
-                <textarea asp-for="Descricao" class="form-control" ></textarea>
-                <span asp-validation-for="Descricao" class="text-danger small"></span>
+                <label for="inpDescricao" class="form-label">Descrição</label>
+                <textarea id="inpDescricao" class="form-control">@Model?.Descricao</textarea>
+                <div class="invalid-feedback">Campo obrigatório.</div>
             </div>
 
             <div class="mb-3">
-                <label asp-for="Preco" class="form-label">Preço</label>
-                <input asp-for="Preco" class="form-control" />
-                <span asp-validation-for="Preco" class="text-danger small"></span>
+                <label for="inpPreco" class="form-label">Preço</label>
+                <input type="text" id="inpPreco" class="form-control" value="@Model?.Preco.ToString("N2")" />
+                <div class="invalid-feedback">Informe um preço válido.</div>
             </div>
+
             <div class="mb-3">
-                <label asp-for="QuantidadeEstoque" class="form-label">Quantidade em Estoque</label>
-                <input asp-for="QuantidadeEstoque" class="form-control" />
-                <span asp-validation-for="QuantidadeEstoque" class="text-danger small"></span>
+                <label for="inpQuantidade" class="form-label">Quantidade em Estoque</label>
+                <input type="number" id="inpQuantidade" class="form-control" value="@Model?.QuantidadeEstoque" />
+                <div class="invalid-feedback">Informe uma quantidade válida.</div>
             </div>
 
             <div class="d-flex justify-content-between">
                 <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
-                <button type="submit" class="btn btn-success">
-                    <i class="fas fa-save me-1"></i> @(isEdicao ? "Salvar" : "Cadastrar")
+                <button type="button" id="btnSalvar" class="btn btn-success">
+                    <i class="fas fa-save me-1"></i> Salvar
                 </button>
             </div>
         </form>
@@ -51,6 +49,7 @@
 </div>
 
 @section Scripts {
+    <script src="~/js//Views/Produto/Produto_Cadastro.js"></script>
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }

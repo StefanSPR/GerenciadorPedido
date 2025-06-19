@@ -2,7 +2,7 @@
 
 namespace GerenciadorPedido.Application.ViewModel
 {
-    public class ProdutoModel:BaseModelId
+    public class ProdutoModel : BaseModelId
     {
         public ProdutoModel(string nome, string descricao, decimal preco, int quantidadeEstoque)
         {

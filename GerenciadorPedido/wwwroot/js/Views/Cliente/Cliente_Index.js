@@ -1,30 +1,36 @@
-﻿$(function () {
-    let escopo = {
-        campo: $('#inpDescricao'),
-        botoes: {
-            pesquisa: $('#btnPesquisar'),
-        },
-        tabela: $('#tablePesquisa')
-    }
+﻿let escopo = {
+    campo: $('#inpDescricao'),
+    botoes: {
+        pesquisa: $('#btnPesquisar'),
+    },
+    tabela: $('#tablePesquisa')
+}
+$(function () {
     $(document).ready(function () {
 
 
         escopo.botoes.pesquisa.on('click', function () {
-            $.ajax({
-                url: caminhoControler + '/GetPesquisar?descricao=' + escopo.campo.val(),
-                method: 'GET',
-                dataType: 'json',
-                success: function (data) {
-                    InicializarDataTable(data);
-                },
-                error: MensagemErro,
-                complete: function () {
-
-                }
-            });
+            Pesquisar()
         })
     })
 
+
+})
+function Pesquisar() {
+
+    $.ajax({
+        url: caminhoControler + '/GetPesquisar?descricao=' + escopo.campo.val(),
+        method: 'GET',
+        dataType: 'json',
+        success: function (data) {
+            InicializarDataTable(data);
+        },
+        error: MensagemErro,
+        complete: function () {
+
+        }
+    });
+}
     function InicializarDataTable(data) {
         let elmTable = escopo.tabela;
         let table;
@@ -68,8 +74,6 @@
             })
         }
     }
-    
-})
 
 function Apagar(id) {
     $.ajax({
@@ -77,7 +81,7 @@ function Apagar(id) {
         method: 'DELETE',
         dataType: 'json',
         success: function () {
-            escopo.botoes.pesquisa.click();
+            Pesquisar();
         },
         error: MensagemErro,
         complete: function () {
