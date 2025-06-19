@@ -33,8 +33,7 @@ function Pesquisar() {
         success: function (data) {
             InicializarDataTable(data);
         },
-        error: function (erro) {
-        },
+        error: MensagemErro,
         complete: function () {
         }
     });
@@ -148,8 +147,7 @@ function Avancar(id, callback) {
         method: 'PUT',
         dataType: 'json',
         success: callback,
-        error: function (err) {
-        },
+        error: MensagemErro,
         complete: function () {
 
         }

@@ -1,4 +1,8 @@
-﻿
+﻿function MensagemErro() {
+    toastr.error("Ocorreu um erro ao realizar opração, contate o administrador!");
+}
+
+
 function ProdutoObterPorId(id, callback) {
     if (id != null) {
         $.ajax({

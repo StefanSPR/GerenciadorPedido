@@ -17,8 +17,7 @@
                 success: function (data) {
                     InicializarDataTable(data);
                 },
-                error: function (erro) {
-                },
+                error: MensagemErro,
                 complete: function () {
 
                 }
@@ -79,8 +78,7 @@ function Apagar(id) {
         success: function () {
             escopo.botoes.pesquisa.click();
         },
-        error: function (err) {
-        },
+        error: MensagemErro,
         complete: function () {
 
         }
